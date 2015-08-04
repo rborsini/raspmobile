@@ -1,0 +1,54 @@
+﻿<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Rasp Mobile</title>
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+    
+
+</head>
+<body>
+
+    <h1>Hello, world!</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Stato</th>
+            </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table> 
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+
+    <script>
+
+        $(document).ready(function () {
+
+            console.log("document loaded");
+
+            $.getJSON("relays", function (result) {
+
+                for (i = 0; i < result.length; i++) {
+
+                    $('tbody').append('<tr><td>' + result[i].name + '</td><td>' + result[i].status + '</td></tr>');
+
+                }
+
+            });
+
+        });
+
+    </script>
+
+
+</body>
+</html>
