@@ -34,8 +34,9 @@ app.get('/relays', raspberry.list);
 app.get('/on', raspberry.on);
 app.get('/off', raspberry.off);
 
-//app.get('/write', raspberry.write);
-//app.get('/read', raspberry.read);
+app.get('/write-on', raspberry.write_on);
+app.get('/write-off', raspberry.write_off);
+app.get('/read', raspberry.read);
 
 http.createServer(app).listen(app.get('port'), function () {
     console.log('Express server listening on port ' + app.get('port'));

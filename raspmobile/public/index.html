@@ -19,6 +19,7 @@
             <tr>
                 <th>Nome</th>
                 <th>Stato</th>
+                <th>Leggi</th>
                 <th>Accendi / Spegni</th> 
             </tr>
         </thead>
@@ -40,12 +41,27 @@
 
                 for (i = 0; i < result.length; i++) {
 
-                    var str = '<tr><td>' + result[i].name + '</td><td class="status_' + result[i].id + '" >' + result[i].status + '</td><td><button data-id="' + result[i].id + '" >Toggle</button></td></tr>';
+                    var str = '<tr>' + 
+								'<td>' + result[i].name + '</td>' + 
+								'<td class="status_' + result[i].id + '" ></td>' + 
+								'<td><button class="read" data-id="' + result[i].id + '" >Read</button></td>' + 
+								'<td><button class="write" data-id="' + result[i].id + '" >Toggle</button></td>' + 
+							  '</tr>';
+
                     $('tbody').append(str);
 
                 }
 
-                $('button').click(function(e){
+                $('.read').click(function(e){
+            
+                    var relayId = $(this).attr('data-id');
+                    $.getJSON("relays?id=" + relayId, function (result) {
+                        $($('.status_' + result.id)[0]).html(result.status);                        
+                    });
+                    
+                });
+
+                $('.write').click(function(e){
             
                     var relayId = $(this).attr('data-id');
                     $.getJSON("relays?id=" + relayId, function (result) {
