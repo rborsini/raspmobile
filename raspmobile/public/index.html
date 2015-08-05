@@ -19,10 +19,12 @@
             <tr>
                 <th>Nome</th>
                 <th>Stato</th>
+                <th>Accendi</th> 
+                <th>Spegni</th> 
             </tr>
         </thead>
         <tbody>
-
+           
         </tbody>
     </table> 
 
@@ -39,11 +41,22 @@
 
                 for (i = 0; i < result.length; i++) {
 
-                    $('tbody').append('<tr><td>' + result[i].name + '</td><td>' + result[i].status + '</td></tr>');
+                    var str = '<tr><td>' + result[i].name + '</td><td>' + result[i].status + '</td><td><button data-name="' + result[i].name + '" >Toggle</button></td></tr>';
+                    console.log("str", str);
+                    $('tbody').append(str);
 
                 }
 
+                $('button').click(function(e){
+                    
+                    var relayName = $(this).attr('data-name');
+                    
+                    console.log("click", relayName);
+                });
+
             });
+            
+
 
         });
 
