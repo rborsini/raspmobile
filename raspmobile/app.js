@@ -31,6 +31,11 @@ if ('development' == app.get('env')) {
 
 app.get('/', routes.index);
 app.get('/relays', raspberry.list);
+app.get('/on', raspberry.on);
+app.get('/off', raspberry.off);
+
+//app.get('/write', raspberry.write);
+//app.get('/read', raspberry.read);
 
 http.createServer(app).listen(app.get('port'), function () {
     console.log('Express server listening on port ' + app.get('port'));

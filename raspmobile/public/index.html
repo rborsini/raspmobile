@@ -14,15 +14,16 @@
 
     <h1>Hello, world!</h1>
 
-    <table>
+    <table class="table" > 
         <thead>
             <tr>
                 <th>Nome</th>
                 <th>Stato</th>
+                <th>Accendi / Spegni</th> 
             </tr>
         </thead>
         <tbody>
-
+           
         </tbody>
     </table> 
 
@@ -39,11 +40,29 @@
 
                 for (i = 0; i < result.length; i++) {
 
-                    $('tbody').append('<tr><td>' + result[i].name + '</td><td>' + result[i].status + '</td></tr>');
+                    var str = '<tr><td>' + result[i].name + '</td><td class="status_' + result[i].id + '" >' + result[i].status + '</td><td><button data-id="' + result[i].id + '" >Toggle</button></td></tr>';
+                    $('tbody').append(str);
 
                 }
 
+                $('button').click(function(e){
+            
+                    var relayId = $(this).attr('data-id');
+                    $.getJSON("relays?id=" + relayId, function (result) {
+
+                        var newStatus = result.status == 'on' ? 'off' : 'on';
+
+                        $.getJSON(newStatus + "?id=" + relayId, function (relay) {
+                            $($('.status_' + relay.id)[0]).html(relay.status);
+                        });
+
+
+                    });
+                    
+                });
+
             });
+            
 
         });
 
